@@ -27,11 +27,20 @@ function getValuation(lotPrice) {
 function App() {
   return (
     <div>
-      <h1>Stock List</h1> 
-      <hr />
+      <h1>Stock List</h1>
+      <hr/>
+      <ListView/>
+    </div>
+  );
+
+}
+
+function ListView() {
+  return (
+    <div>
       {stockList.map(function (stock) {
         return (
-          <div key={stock.price}>
+          <div key={stock.symbol}>
             <span>
               {stock.symbol} : {stock.price}
             </span>
