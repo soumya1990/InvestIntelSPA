@@ -13,6 +13,21 @@ const stockList = [
     lotsize: 250,
   },
 ];
+const stockList1 = [
+  {
+    id: 1,
+    symbol: "HDFC",
+    price: 2200,
+    lotsize: 200,
+  },
+
+  {
+    id: 2,
+    symbol: "UPL",
+    price: 656,
+    lotsize: 900,
+  },
+];
 
 function getLotPrice (lotSize, price) {
   return lotSize*price
@@ -29,16 +44,17 @@ function App() {
     <div>
       <h1>Stock List</h1>
       <hr/>
-      <ListView/>
+      <ListView stockList = {stockList}/>
+      <ListView stockList = {stockList1}/>
     </div>
   );
 
 }
 
-function ListView() {
+function ListView(props) {
   return (
     <div>
-      {stockList.map(function (stock) {
+      {props.stockList.map(function (stock) {
         return (
           <div key={stock.symbol}>
             <span>
