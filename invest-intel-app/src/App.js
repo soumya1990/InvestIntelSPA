@@ -29,30 +29,24 @@ const stockList1 = [
   },
 ];
 
-function getLotPrice (lotSize, price) {
-  return lotSize*price
-}
+const getLotPrice = (lotSize, price) => lotSize * price;
 
-function getValuation(lotPrice) {
+
+const getValuation = lotPrice => {
   if(lotPrice<500000) return 'LOW'
   if(lotPrice<700000) return 'MID'
   else return 'HIGH'
 }
 
-function App() {
-  return (
+const App = () => 
     <div>
       <h1>Stock List</h1>
       <hr/>
       <ListView stockList = {stockList}/>
       <ListView stockList = {stockList1}/>
-    </div>
-  );
+    </div>;
 
-}
-
-function ListView(props) {
-  return (
+const ListView = (props) => 
     <div>
       {props.stockList.map(function (stock) {
         return (
@@ -75,8 +69,6 @@ function ListView(props) {
           </div>
         );
       })}
-    </div>
-  );
-}
+    </div>;
 
 export default App;
