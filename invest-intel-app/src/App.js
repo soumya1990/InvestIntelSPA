@@ -1,3 +1,5 @@
+import React from "react";
+
 const stockList = [
   {
     id: 1,
@@ -78,48 +80,71 @@ const getValuation = (lotPrice) => {
   else return "HIGH";
 };
 
-const App = () => (
-  <div>
-    <h1>Stock List</h1>
-    <SearchBar />
-    <hr />
-    <ListView stockList={stockList} />
-  </div>
-);
-const handleSearch = (event) => {
-  console.log(event)
-}
+const App = () => {
+  const [searchTerm, setSearchTerm] = React.useState("");
+  return (
+    <div>
+      <h1>Stock List</h1>
+      <SearchBar setSearchTerm={setSearchTerm} />
+      <SearchTitle searchTerm={searchTerm} />
+      <hr />
+      <ListView stockList={stockList} searchTerm={searchTerm} />
+    </div>
+  );
+};
 
-const SearchBar = () => (
-  <div>
-    <label htmlFor="searchStock">Search:</label>
-    <input id="searchStock " type="text" onChange={handleSearch}></input>
-    <button type="submit">Search</button>
-  </div>
-);
+const SearchTitle = (props) => {
+  const strLen = props.searchTerm.trim().length
+  if (strLen) {
+    return (
+      <p>
+        Searching for <strong>{props.searchTerm}</strong>
+      </p>
+    );
+  } else {
+    return "";
+  }
+};
 
-const ListView = (props) => (
-  <div>
-    {props.stockList.map(function (stock) {
-      return (
-        <div key={stock.symbol}>
-          <span>
-            {stock.symbol} : {stock.price}
-          </span>
-          <br />
-          <span>lotsize : {stock.lotsize}</span>
-          <br />
-          <span>LotPrice: {getLotPrice(stock.lotsize, stock.price)}</span>
-          <br />
-          <span>
-            Valuation: {getValuation(getLotPrice(stock.lotsize, stock.price))}
-          </span>
-          <br />
-          <hr />
-        </div>
-      );
-    })}
-  </div>
-);
+const SearchBar = (props) => {
+  const handleSearch = (event) => {
+    console.log(event);
+    props.setSearchTerm(event.target.value);
+  };
+  return (
+    <div>
+      <label htmlFor="searchStock">Search:</label>
+      <input id="searchStock " type="text" onChange={handleSearch}></input>
+      <button type="submit">Search</button>
+    </div>
+  );
+};
+
+const ListView = (props) => {
+  const filteredStockList = props.stockList.filter(stock => stock.symbol.toLowerCase().includes(props.searchTerm.toLowerCase()));
+  return (
+    <div>
+      {filteredStockList.map(function (stock) {
+        return (
+          <div key={stock.symbol}>
+            <span>
+              {stock.symbol} : {stock.price}
+            </span>
+            <br />
+            <span>lotsize : {stock.lotsize}</span>
+            <br />
+            <span>LotPrice: {getLotPrice(stock.lotsize, stock.price)}</span>
+            <br />
+            <span>
+              Valuation: {getValuation(getLotPrice(stock.lotsize, stock.price))}
+            </span>
+            <br />
+            <hr />
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
 export default App;
