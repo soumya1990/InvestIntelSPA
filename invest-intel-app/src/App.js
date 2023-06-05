@@ -82,13 +82,22 @@ const getValuation = (lotPrice) => {
 
 const App = () => {
   const [searchTerm, setSearchTerm] = React.useState("");
+  const handleSearch = (event) => {
+    console.log(event);
+    setSearchTerm(event.target.value);
+  };
+  const filteredStockList = stockList.filter(stock => stock.symbol.toLowerCase().includes(searchTerm.toLowerCase()));
+
   return (
     <div>
       <h1>Stock List</h1>
-      <SearchBar setSearchTerm={setSearchTerm} />
+      <SearchBar
+        searchTerm={searchTerm}
+        onSearch={handleSearch}
+      />
       <SearchTitle searchTerm={searchTerm} />
       <hr />
-      <ListView stockList={stockList} searchTerm={searchTerm} />
+      <ListView list={filteredStockList} />
     </div>
   );
 };
@@ -106,45 +115,45 @@ const SearchTitle = (props) => {
   }
 };
 
-const SearchBar = (props) => {
-  const handleSearch = (event) => {
-    console.log(event);
-    props.setSearchTerm(event.target.value);
-  };
+const SearchBar = ({searchTerm, onSearch}) => {
   return (
     <div>
       <label htmlFor="searchStock">Search:</label>
-      <input id="searchStock " type="text" onChange={handleSearch}></input>
+      <input id="search"
+       type="text"
+       value={searchTerm}
+       onChange={onSearch}>
+
+       </input>
       <button type="submit">Search</button>
     </div>
   );
 };
 
-const ListView = (props) => {
-  const filteredStockList = props.stockList.filter(stock => stock.symbol.toLowerCase().includes(props.searchTerm.toLowerCase()));
-  return (
+const Item = ({ symbol, lotsize, price }) => (
+  <div>
+    <span>
+      {symbol} : {price}
+    </span>
+    <br/>
+    <span>lotsize : {lotsize}</span>
+    <br/>
+    <span>LotPrice: {getLotPrice(lotsize, price)}</span>
+    <br/>
+    <span>
+      Valuation: {getValuation(getLotPrice(lotsize, price))}
+    </span>
+    <br/>
+  </div>
+);
+
+const ListView = ({ list }) =>
+  list.map((item) => (
     <div>
-      {filteredStockList.map(function (stock) {
-        return (
-          <div key={stock.symbol}>
-            <span>
-              {stock.symbol} : {stock.price}
-            </span>
-            <br />
-            <span>lotsize : {stock.lotsize}</span>
-            <br />
-            <span>LotPrice: {getLotPrice(stock.lotsize, stock.price)}</span>
-            <br />
-            <span>
-              Valuation: {getValuation(getLotPrice(stock.lotsize, stock.price))}
-            </span>
-            <br />
-            <hr />
-          </div>
-        );
-      })}
+      <Item key={item.symbol} {...item} />
+      <hr />
     </div>
-  );
-};
+  ));
+
 
 export default App;
