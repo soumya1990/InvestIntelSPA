@@ -72,7 +72,7 @@ const stockList = [
   },
 ];
 
-const getLotPrice = (lotSize, price) => lotSize * price;
+const getLotPrice = (lotSize, price) =>  lotSize * price;
 
 const getValuation = (lotPrice) => {
   if (lotPrice < 500000) return "LOW";
@@ -80,8 +80,16 @@ const getValuation = (lotPrice) => {
   else return "HIGH";
 };
 
+const useSemiPersistentState = (key,initialState) => {
+  const [value, setValue] = React.useState(localStorage.getItem(key)||initialState)
+  React.useEffect(()=>{
+    localStorage.setItem(key, value)
+  },[key,value])
+  return [value, setValue];
+}
+
 const App = () => {
-  const [searchTerm, setSearchTerm] = React.useState("");
+  const [searchTerm, setSearchTerm] = useSemiPersistentState('search', '')
   const handleSearch = (event) => {
     console.log(event);
     setSearchTerm(event.target.value);
@@ -115,35 +123,31 @@ const SearchTitle = (props) => {
   }
 };
 
-const SearchBar = ({searchTerm, onSearch}) => {
-  return (
-    <div>
-      <label htmlFor="searchStock">Search:</label>
-      <input id="search"
-       type="text"
-       value={searchTerm}
-       onChange={onSearch}>
-
-       </input>
-      <button type="submit">Search</button>
-    </div>
-  );
-};
+const SearchBar = ({ searchTerm, onSearch }) => (
+  <>
+    <label htmlFor="searchStock">Search:</label>
+    <input
+      id="search"
+      type="text"
+      value={searchTerm}
+      onChange={onSearch}
+    ></input>
+    <button type="submit">Search</button>
+  </>
+);
 
 const Item = ({ symbol, lotsize, price }) => (
   <div>
     <span>
       {symbol} : {price}
     </span>
-    <br/>
+    <br />
     <span>lotsize : {lotsize}</span>
-    <br/>
+    <br />
     <span>LotPrice: {getLotPrice(lotsize, price)}</span>
-    <br/>
-    <span>
-      Valuation: {getValuation(getLotPrice(lotsize, price))}
-    </span>
-    <br/>
+    <br />
+    <span>Valuation: {getValuation(getLotPrice(lotsize, price))}</span>
+    <br />
   </div>
 );
 
