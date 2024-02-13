@@ -28,31 +28,6 @@
   color: #61dafb;
 }
 
-.card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 16px;
-  margin: 16px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-}
-.card-content {
-  font-size: 1rem;
-  color: #333;
-}
-.card-title {
-  font-size: 1.5rem;
-  margin-bottom: 8px;
-}
-.card.green {
-  background-color: #aafca3; /* Adjust the color as needed */
-}
-
-/* Red background */
-.card.red {
-  background-color: #fcaaa3; /* Adjust the color as needed */
-}
-
 /* SearchComponent.css */
 
 
@@ -88,6 +63,82 @@
   background-color: #45a049; /* Darker green on hover, adjust as needed */
 }
 
+.card {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+.card.green {
+  background-color: #aafca3; /* Adjust the color as needed */
+}
+
+/* Red background */
+.card.red {
+  background-color: #fcaaa3; /* Adjust the color as needed */
+}
+
+.card:hover {
+  transform: translate(5px, 5px);
+}
+
+.left-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.middle-section {
+  flex: 2;
+  display: normal;
+  align-items: center;
+}
+
+.right-section {
+  flex: 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative; /* Position relative for absolute positioning of the circle */
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+p {
+  font-size: 1rem;
+  color: #333;
+}
+
+
+.graph-line {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  right: 80%;
+  transform: translate(-50%);
+  width: 80%; /* Adjust the length of the line as needed */
+  height: 2px;
+  margin-right: auto;
+  background-color: #ccc;
+}
+
+.graph-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%; /* Position the circle at the end of the line */
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  background-color: #614caf; /* Green color, adjust as needed */
+  border-radius: 50%;
+  z-index: 1;
+}
 
 @keyframes App-logo-spin {
   from {
