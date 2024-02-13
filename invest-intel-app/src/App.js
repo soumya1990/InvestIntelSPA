@@ -1,5 +1,7 @@
 import React from "react";
 
+import './App.css';
+
 const url =
   "https://investinteldatatrigger.azurewebsites.net/api/InvestIntelDataTrigger";
 const options = {
@@ -51,16 +53,6 @@ const useSemiPersistentState = (key, initialState) => {
   return [value, setValue];
 };
 
-/* const getAsyncStockData = async () => {
-
-  try {
-    const response = await fetch(url, options);
-    const result = await response.text();
-    return result
-  } catch (error) {
-    console.error(error);
-  }
-} */
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "");
@@ -117,35 +109,36 @@ const SearchTitle = (props) => {
 
 const SearchBar = ({ searchTerm, onSearch }) => (
   <>
-    <label htmlFor="searchStock">Search:</label>
-    <input
+  <div className="search-container">
+    <input className="search-input" 
       id="search"
       type="text"
+      placeholder="Search Stock..."
       value={searchTerm}
       onChange={onSearch}
     ></input>
-    <button type="submit">Search</button>
+    <button className="search-button" type="submit">Search</button>
+    </div>
   </>
 );
 
 const Item = (stock) => (
-  <div>
-    <span>SYMBOL : {stock["SYMBOL "]}</span>
+  <div className={`card ${stock["%CHNG "] > 0 ? 'green' : 'red'}`}>
+    <span className="card-title"> {stock["SYMBOL "]}</span>
     <br />
-    <span>LTP : {stock["LTP "]}</span>
+    <span className="card-content">LTP : {stock["LTP "]}</span>
     <br />
-    <span>52W H : {stock["52W H "]}</span>
+    <span className="card-content">52W H : {stock["52W H "]}</span>
     <br />
-    <span>52W L : {stock["52W L "]}</span>
+    <span className="card-content">52W L : {stock["52W L "]}</span>
     <br />
   </div>
 );
 
 const ListView = ({ list }) =>
   list.map((item, index) => (
-    <div>
+    <div className="card">
       <Item key={index} {...item} />
-      <hr />
     </div>
   ));
 
