@@ -122,18 +122,40 @@ const SearchBar = ({ searchTerm, onSearch }) => (
   </>
 );
 
-const Item = (stock) => (
+const numberWithOutComma = (num) => {
+   return parseFloat(num.replace(/,/g, ''));
+}
+
+
+function Item (stock) { 
+  const low = numberWithOutComma(stock["52W L "]);
+  const high = numberWithOutComma(stock["52W H "]);
+  const price = numberWithOutComma(stock["LTP "]);
+  const price_pos = Math.round((price - low)/(high-low) * 100);
+  
+  const circleposStyle = { 
+    left : `${price_pos}%`
+  };
+  return ( 
   <div className={`card ${stock["%CHNG "] > 0 ? 'green' : 'red'}`}>
-    <span className="card-title"> {stock["SYMBOL "]}</span>
-    <br />
-    <span className="card-content">LTP : {stock["LTP "]}</span>
-    <br />
-    <span className="card-content">52W H : {stock["52W H "]}</span>
-    <br />
-    <span className="card-content">52W L : {stock["52W L "]}</span>
-    <br />
+    <div className="left-section">
+      <h2>{stock["SYMBOL "]}</h2>
+    </div>
+    <div className="middle-section">
+      <p>price : {price}</p>
+      <p>1Y Low : {low}</p>
+      <p>1Y High : {high}</p>
+    </div>
+    <div className="right-section">
+      <div className="graph-line">
+      <div className="graph-circle" style={circleposStyle}></div>
+      </div>
+    </div>
   </div>
 );
+}
+
+
 
 const ListView = ({ list }) =>
   list.map((item, index) => (
