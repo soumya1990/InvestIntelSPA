@@ -1,48 +1,45 @@
 import React from "react";
 
 const url =
-  "https://twelve-data1.p.rapidapi.com/stocks?exchange=NASDAQ&format=json";
+  "https://investinteldatatrigger.azurewebsites.net/api/InvestIntelDataTrigger";
 const options = {
-  method: "GET",
-  headers: {
-    "X-RapidAPI-Key": "9c342da74bmsh13ce343e2934570p1db565jsn5c628f1c01c8",
-    "X-RapidAPI-Host": "twelve-data1.p.rapidapi.com",
-  },
+  method: "GET"
 };
 
 const initialStocks = [
-  {
-    id: 1,
-    symbol: "AACG",
-    name: "ATA Creativity Global",
-    currency: "USD",
-    exchange: "NASDAQ",
-    mic_code: "XNMS",
-    country: "United States",
-    type: "Depositary Receipt",
-  },
+    {
+      "SYMBOL ": "NIFTY 50",
+      "OPEN ": "21,727.00",
+      "HIGH ": "21,804.45",
+      "LOW ": "21,629.90",
+      "PREV. CLOSE ": "21,717.95",
+      "LTP ": "21,782.50",
+      "CHNG ": "64.55",
+      "%CHNG ": "0.30",
+      "VOLUME (shares)": "34,92,22,850",
+      "VALUE  (₹ Crores)": "31,175.97",
+      "52W H ": "22,126.80",
+      "52W L ": "16,828.35",
+      "30 D   %CHNG ": "0.76",
+      "365 D % CHNG  09-Feb-2023": "21.73"
+    },
 
-  {
-    id: 2,
-    symbol: "AACI",
-    name: "Armada Acquisition Corp. I",
-    currency: "USD",
-    exchange: "NASDAQ",
-    mic_code: "XNMS",
-    country: "United States",
-    type: "Common Stock",
-  },
-
-  {
-    id: 3,
-    symbol: "AACIU",
-    name: "Armada Acquisition Corp. I Unit",
-    currency: "USD",
-    exchange: "NASDAQ",
-    mic_code: "XNMS",
-    country: "United States",
-    type: "Common Stock",
-  },
+    {
+      "SYMBOL ": "GRASIM",
+      "OPEN ": "2,057.25",
+      "HIGH ": "2,182.00",
+      "LOW ": "2,046.90",
+      "PREV. CLOSE ": "2,057.30",
+      "LTP ": "2,179.05",
+      "CHNG ": "121.75",
+      "%CHNG ": "5.92",
+      "VOLUME (shares)": "20,10,089",
+      "VALUE  (₹ Crores)": "428.45",
+      "52W H ": "2,182.05",
+      "52W L ": "1,527.05",
+      "30 D   %CHNG ": "4.83",
+      "365 D % CHNG  09-Feb-2023": "31.95"
+    }
 ];
 const useSemiPersistentState = (key, initialState) => {
   const [value, setValue] = React.useState(
@@ -85,14 +82,13 @@ const App = () => {
     promiseResult.then((result) => {
       //debugger;
       const jsonData = JSON.parse(result);
-      setStocks(jsonData.data);
+      setStocks(jsonData);
     });
   }, []);
 
   const filteredStocks = stocks.filter((stock) => {
     return (
-      stock.symbol.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      stock.name.toLowerCase().includes(searchTerm.toLowerCase())
+      stock["SYMBOL "].toLowerCase().includes(searchTerm.toLowerCase())
     );
   });
   return (
@@ -132,23 +128,23 @@ const SearchBar = ({ searchTerm, onSearch }) => (
   </>
 );
 
-const Item = ({ symbol, name, currency, exchange }) => (
+const Item = (stock) => (
   <div>
-    <span>symbol : {symbol}</span>
+    <span>SYMBOL : {stock["SYMBOL "]}</span>
     <br />
-    <span>name : {name}</span>
+    <span>LTP : {stock["LTP "]}</span>
     <br />
-    <span>currency: {currency}</span>
+    <span>52W H : {stock["52W H "]}</span>
     <br />
-    <span>exchange: {exchange}</span>
+    <span>52W L : {stock["52W L "]}</span>
     <br />
   </div>
 );
 
 const ListView = ({ list }) =>
-  list.map((item) => (
+  list.map((item, index) => (
     <div>
-      <Item key={item.symbol} {...item} />
+      <Item key={index} {...item} />
       <hr />
     </div>
   ));
