@@ -36,6 +36,9 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;
 }
+.card:hover {
+  transform: translate(5px, 5px);
+}
 .card-content {
   font-size: 1rem;
   color: #333;

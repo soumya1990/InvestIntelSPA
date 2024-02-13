@@ -137,7 +137,7 @@ const Item = (stock) => (
 
 const ListView = ({ list }) =>
   list.map((item, index) => (
-    <div className="card">
+    <div>
       <Item key={index} {...item} />
     </div>
   ));
