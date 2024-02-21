@@ -54,7 +54,7 @@ const useSemiPersistentState = (key, initialState) => {
 };
 
 
-const App = () => {
+const Stock = () => {
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "");
 
   const handleSearch = (event) => {
@@ -85,7 +85,6 @@ const App = () => {
   });
   return (
     <div>
-      <h1>Stock List</h1>
       <SearchBar searchTerm={searchTerm} onSearch={handleSearch} />
       <SearchTitle searchTerm={searchTerm} />
       <hr />
@@ -164,4 +163,4 @@ const ListView = ({ list }) =>
     </div>
   ));
 
-export default App;
+export default Stock;
