@@ -5,6 +5,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Stock from "./Stock";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import ComingSoon from "./ComingSoon";
 
 const sections = [
   { title: "Stock", url: "stocks" },
@@ -22,7 +23,10 @@ const InvestIntel = () => {
       </Container>
       <Router>
         <Routes>
+          <Route path="/" element={<Stock />} />
           <Route path="/stocks" element={<Stock />} />
+          <Route path="/health" element={<ComingSoon />} />
+          <Route path="/time" element={<ComingSoon />} />
         </Routes>
       </Router>
     </ThemeProvider>
