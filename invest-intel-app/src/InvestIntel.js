@@ -10,7 +10,7 @@ import ComingSoon from "./ComingSoon";
 const sections = [
   { title: "Stock", url: "stocks" },
   { title: "Health", url: "health" },
-  { title: "Time", url: "time" },
+  { title: "TODO", url: "todo" },
 ];
 
 const InvestIntel = () => {
@@ -26,7 +26,7 @@ const InvestIntel = () => {
           <Route path="/" element={<Stock />} />
           <Route path="/stocks" element={<Stock />} />
           <Route path="/health" element={<ComingSoon />} />
-          <Route path="/time" element={<ComingSoon />} />
+          <Route path="/todo" element={<ComingSoon />} />
         </Routes>
       </Router>
     </ThemeProvider>
