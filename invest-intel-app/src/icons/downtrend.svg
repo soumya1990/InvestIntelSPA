@@ -1,0 +1,20 @@
+ <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 100 100"
+      width="50"
+      height="50"
+      fill="none"
+    >
+      {/* Circular background */}
+      <circle cx="50" cy="50" r="45" fill="#C41212" />
+
+      {/* Stock upmove graph (example line) */}
+      <path
+        d="M0 50 L50 50 L100 75"
+        fill="none"
+        stroke="rgb(255, 0, 0)"
+        strokeWidth="100"
+      />
+
+      {/* You can add more elements for a more detailed stock graph */}
+    </svg>
