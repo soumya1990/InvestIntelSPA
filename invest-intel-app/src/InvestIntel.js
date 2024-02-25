@@ -1,6 +1,6 @@
 import React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import Header from "./Header";
+import FixedWidthAppBar from "./AppBar";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Stock from "./Stock";
@@ -19,7 +19,7 @@ const InvestIntel = () => {
       <CssBaseline />
       <CssBaseline />
       <Container maxWidth="lg">
-        <Header title="Invest-Intel" sections={sections} />
+        <FixedWidthAppBar title="Invest-Intel" sections={sections} />
       </Container>
       <Router>
         <Routes>

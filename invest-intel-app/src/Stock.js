@@ -8,6 +8,7 @@ import {
   YEAR_HIGH,
   YEAR_LOW,
 } from "./Constants";
+import StockCard from "./StockCard";
 
 const url =
   "https://investinteldatatrigger.azurewebsites.net/api/InvestIntelDataTrigger";
@@ -132,7 +133,7 @@ const numberWithOutComma = (num) => {
 };
 
 function Item(stock) {
-  const low = numberWithOutComma(stock[YEAR_LOW]);
+  const low = numberWithOutComma(stock.PRICE);
   const high = numberWithOutComma(stock[YEAR_HIGH]);
   const price = numberWithOutComma(stock[PRICE]);
   const price_pos = Math.round(((price - low) / (high - low)) * 100);
@@ -162,7 +163,7 @@ function Item(stock) {
 const ListView = ({ list }) =>
   list.map((item, index) => (
     <div>
-      <Item key={index} {...item} />
+      <StockCard key={index} {...item} />
     </div>
   ));
 
