@@ -2,7 +2,7 @@ import React from "react";
 import { LinearProgress, Typography } from "@mui/material";
 
 function PercentageLine({ percentage }) {
-  const [markerPosition, setMarkerPosition] = React.useState(percentage);
+  const [markerPosition] = React.useState(percentage);
 
   return (
     <div

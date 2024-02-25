@@ -1,13 +1,7 @@
 import React from "react";
 
 import "./App.css";
-import {
-  SYMBOL,
-  PRICE,
-  CHANGE_PERCENT,
-  YEAR_HIGH,
-  YEAR_LOW,
-} from "./Constants";
+import { SYMBOL } from "./Constants";
 import StockCard from "./StockCard";
 
 const url =
@@ -127,38 +121,6 @@ const SearchBar = ({ searchTerm, onSearch }) => (
     </div>
   </>
 );
-
-const numberWithOutComma = (num) => {
-  return parseFloat(num.replace(/,/g, ""));
-};
-
-function Item(stock) {
-  const low = numberWithOutComma(stock.PRICE);
-  const high = numberWithOutComma(stock[YEAR_HIGH]);
-  const price = numberWithOutComma(stock[PRICE]);
-  const price_pos = Math.round(((price - low) / (high - low)) * 100);
-
-  const circleposStyle = {
-    left: `${price_pos}%`,
-  };
-  return (
-    <div className={`card ${stock[CHANGE_PERCENT] > 0 ? "green" : "red"}`}>
-      <div className="left-section">
-        <h2>{stock[SYMBOL]}</h2>
-      </div>
-      <div className="middle-section">
-        <p>price : {price}</p>
-        <p>1Y Low : {low}</p>
-        <p>1Y High : {high}</p>
-      </div>
-      <div className="right-section">
-        <div className="graph-line">
-          <div className="graph-circle" style={circleposStyle}></div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 const ListView = ({ list }) =>
   list.map((item, index) => (

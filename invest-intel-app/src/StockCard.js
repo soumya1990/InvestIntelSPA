@@ -6,7 +6,6 @@ import {
   CardContent,
   CardHeader,
   Grid,
-  Icon,
   Typography,
 } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -14,9 +13,7 @@ import UpIcon from "./icons/uptrend.svg";
 import DownIcon from "./icons/downtrend.svg";
 import Utils from "./Utils";
 import {
-  SYMBOL,
   PRICE,
-  CHANGE_PERCENT,
   YEAR_HIGH,
   YEAR_LOW,
 } from "./Constants";
