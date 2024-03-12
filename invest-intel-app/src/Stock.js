@@ -26,6 +26,7 @@ const initialStocks = [
     "52WL": "16,828.35",
     "30D%CHNG": "4.61",
     "365D%CHNG22-Feb-2023": "26.56",
+    LOTSIZE: "50",
   },
   {
     SYMBOL: "BAJAJFINSV",
@@ -42,6 +43,7 @@ const initialStocks = [
     "52WL": "1,215.00",
     "30D%CHNG": "0.64",
     "365D%CHNG22-Feb-2023": "17.02",
+    LOTSIZE: "500",
   },
 ];
 const useSemiPersistentState = (key, initialState) => {
