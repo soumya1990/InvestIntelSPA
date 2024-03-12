@@ -24,7 +24,7 @@ const InvestIntel = () => {
       <Container maxWidth="lg">
         <FixedWidthAppBar title="Invest-Intel" sections={sections} />
       </Container>
-      <Box style={{ marginTop: "70px", width: "100%", padding: 40 }}>
+      <Box style={{ marginTop: "70px", width: "100%", padding: 10 }}>
         <Router>
           <Routes>
             <Route path="/" element={<Stock />} />
