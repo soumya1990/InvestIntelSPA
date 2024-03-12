@@ -12,7 +12,13 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import UpIcon from "./icons/uptrend.svg";
 import DownIcon from "./icons/downtrend.svg";
 import Utils from "./Utils";
-import { PRICE, YEAR_HIGH, YEAR_LOW, LOTSIZE, CHANGE_PERCENT_30 } from "./Constants";
+import {
+  PRICE,
+  YEAR_HIGH,
+  YEAR_LOW,
+  LOTSIZE,
+  CHANGE_PERCENT_30,
+} from "./Constants";
 
 import PercentageLine from "./PercentageLine";
 const theme = createTheme();
@@ -20,12 +26,14 @@ const theme = createTheme();
 function StockCard(stock) {
   const positive_daily = stock.CHNG > 0 ? true : false;
   const positive_monthly = stock[CHANGE_PERCENT_30] > 0 ? true : false;
-  const low = Utils.numberWithOutComma(stock[YEAR_LOW]);
-  const high = Utils.numberWithOutComma(stock[YEAR_HIGH]);
+  const year_low = Utils.numberWithOutComma(stock[YEAR_LOW]);
+  const year_high = Utils.numberWithOutComma(stock[YEAR_HIGH]);
   const price = Utils.numberWithOutComma(stock[PRICE]);
   const lotsize = stock[LOTSIZE];
   const lotprice = lotsize * price;
-  const price_pos = Math.round(((price - low) / (high - low)) * 100);
+  const price_pos = Math.round(
+    ((price - year_low) / (year_high - year_low)) * 100
+  );
   const color_subheader = positive_daily > 0 ? "green" : "red";
   const currency = "₹";
   var valuation;
@@ -110,10 +118,12 @@ function StockCard(stock) {
             <Grid item xs={6} sm container gridRow={12} alignContent="center">
               <Grid item xs container direction="column" spacing={2}>
                 <Typography variant="body2" gutterBottom>
-                  52W low: {stock["52WL"]}
+                  52W low: {currency}
+                  {stock["52WL"]}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                  52W high: {stock["52WH"]}
+                  52W high: {currency}
+                  {stock["52WH"]}
                 </Typography>
                 <PercentageLine percentage={price_pos}></PercentageLine>
               </Grid>
