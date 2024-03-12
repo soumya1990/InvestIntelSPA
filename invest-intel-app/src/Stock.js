@@ -10,42 +10,7 @@ const options = {
   method: "GET",
 };
 
-const initialStocks = [
-  {
-    SYMBOL: "NIFTY 50",
-    OPEN: "22,290.00",
-    HIGH: "22,297.50",
-    LOW: "22,186.10",
-    "PREV.CLOSE": "22,217.45",
-    LTP: "22,212.70",
-    CHNG: "-4.75",
-    "%CHNG": "-0.02",
-    "VOLUME(shares)": "22,59,83,194",
-    "VALUE(₹Crores)": "24,616.91",
-    "52WH": "22,297.50",
-    "52WL": "16,828.35",
-    "30D%CHNG": "4.61",
-    "365D%CHNG22-Feb-2023": "26.56",
-    LOTSIZE: "50",
-  },
-  {
-    SYMBOL: "BAJAJFINSV",
-    OPEN: "1,596.00",
-    HIGH: "1,620.90",
-    LOW: "1,596.00",
-    "PREV.CLOSE": "1,592.55",
-    LTP: "1,616.00",
-    CHNG: "23.45",
-    "%CHNG": "1.47",
-    "VOLUME(shares)": "11,99,419",
-    "VALUE(₹Crores)": "193.14",
-    "52WH": "1,741.00",
-    "52WL": "1,215.00",
-    "30D%CHNG": "0.64",
-    "365D%CHNG22-Feb-2023": "17.02",
-    LOTSIZE: "500",
-  },
-];
+const initialStocks = [];
 const useSemiPersistentState = (key, initialState) => {
   const [value, setValue] = React.useState(
     localStorage.getItem(key) || initialState
