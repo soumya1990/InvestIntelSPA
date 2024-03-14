@@ -2,8 +2,6 @@ import React from "react";
 import { LinearProgress, Typography } from "@mui/material";
 
 function PercentageLine({ percentage }) {
-  const [markerPosition] = React.useState(percentage);
-
   return (
     <div
       style={{
@@ -17,7 +15,7 @@ function PercentageLine({ percentage }) {
       </Typography>
       <LinearProgress
         variant="determinate"
-        value={markerPosition}
+        value={percentage}
         style={{ width: "80%" }}
       />
       <Typography variant="body2" gutterBottom>
